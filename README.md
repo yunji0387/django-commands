@@ -1,5 +1,5 @@
-# django-commands
-### create python venv in git bash for Windows
+# django-commands (For Git Bash in Windows)
+### create python venv
  1. Make sure to have python installed, and update pip version
       ```bash
       py -m pip install --upgrade pip
@@ -22,8 +22,8 @@
       ```bash
       deactivate
       ``` 
-### Install django in git bash for Window
- 1. In the project directory, install django with pip
+### Install django library
+ 1. In the directory, install django with pip
       ```bash
       pip install django
       ``` 
@@ -35,3 +35,22 @@
       ```bash
       pip list
       ``` 
+### Create a django project
+ - In the directory, while venv has activated, run:
+   ```bash
+     django-admin startproject <project_name>
+   ```
+### Launch development server
+ 1. In the directory while venv has activated, run:
+   ```bash
+     cd <project_name> 
+   ```
+   ```bash
+      python manage.py runserver 
+   ```
+ 2. If the bash responded with:
+ ```bash
+ Watching for file changes with StatReloader
+ ```
+ - This mean server successfully launched. You can now open localhost. By default, the development server will be accessible at http://127.0.0.1:8000/ or http://localhost:8000/.
+3. To stop development server, just hit ctrl+c in bash.
