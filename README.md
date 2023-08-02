@@ -40,6 +40,16 @@
    ```bash
      django-admin startproject <project_name>
    ```
+
+### Create a django app
+ - In the directory, while venv has activated, run:
+ - ```bash
+     cd <project_name>
+   ```
+   ```bash
+     python manage.py startapp <app_name>
+   ```
+
 ### Launch development server
  1. In the directory while venv has activated, run:
    ```bash
