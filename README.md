@@ -64,3 +64,45 @@
  ```
  - This mean server successfully launched. You can now open localhost. By default, the development server will be accessible at http://127.0.0.1:8000/ or http://localhost:8000/.
 3. To stop development server, just hit ctrl+c in bash.
+
+
+### Creating a view and URL configuration
+1. make sure to have django installed
+2. in the views.py
+   ```bash
+     from django.shortcuts import render
+     from django.http import HttpResponse
+     def home(request):
+         return HttpResponse("Hello World!")
+   ```
+3. in the App-level urls.py(If not exists please create one.)
+    ```bash
+     from django.urls import path
+     from . import views
+     urlpatterns = [
+             path('', views.home, name="home"),
+     ] 
+   ```
+4. in the Project0level urls.py
+   ```bash
+     from django.contrib import admin
+     from django.urls import path, include
+     
+     urlpatterns = [
+         path('admin/', admin.site.urls),
+         path('', include('myapp.urls')),
+     ] 
+   ```
+5. in the setting.py
+   - add "'myapp.apps.MyappConfig'," to the INSTALLED_APPS list.
+   ```bash
+     INSTALLED_APPS = [        
+         'django.contrib.admin',
+         'django.contrib.auth',
+         'django.contrib.contenttypes',
+         'django.contrib.sessions',
+         'django.contrib.messages',
+         'django.contrib.staticfiles',
+         'myapp.apps.MyappConfig', 
+    ]
+   ```
