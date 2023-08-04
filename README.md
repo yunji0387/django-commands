@@ -69,14 +69,14 @@
 ### Creating a view and URL configuration
 1. make sure to have django installed
 2. in the views.py
-   ```bash
+   ```python
      from django.shortcuts import render
      from django.http import HttpResponse
      def home(request):
          return HttpResponse("Hello World!")
    ```
 3. in the App-level urls.py(If not exists please create one.)
-    ```bash
+    ```python
      from django.urls import path
      from . import views
      urlpatterns = [
@@ -84,7 +84,7 @@
      ] 
    ```
 4. in the Project-level urls.py
-   ```bash
+   ```python
      from django.contrib import admin
      from django.urls import path, include
      
@@ -109,7 +109,7 @@
 ### Create URL path with views HttpResponse
 1. make sure to have django installed
 2. in the views.py
-   ```bash
+   ```python
      from django.shortcuts import render
      from http.client import HTTPResponse
      from django.http import HttpResponse
@@ -125,7 +125,7 @@
 
    ```
 3. in the App-level urls.py (If not exists please create one)
-   ```bash
+   ```python
      from django.urls import path
      from . import views
      
@@ -133,3 +133,14 @@
          path('drinks/<str:drink_name>', views.drinks, name="drink_name"), 
      ]
    ```
+### App-level urls.py namespace
+- adding "app_name = <app_name>" to App-level urls.py
+  ```python
+    #demoapp/urls.py
+    from django.urls import path  
+    from . import views    
+    app_name='demoapp' 
+    urlpatterns = [  
+        path('', views.index, name='index'),      
+    ] 
+  ```
