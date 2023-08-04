@@ -134,7 +134,17 @@
      ]
    ```
 ### App-level urls.py namespace
-- adding "app_name = <app_name>" to App-level urls.py
+1. using instance namespace (If use this please skip step 2 - 4)
+   - in Project-level urls.py
+     ```python
+       #in demoproject/urls.py 
+       urlpatterns=[ 
+           # ... 
+           path('demo/', include('demoapp.urls', namespace='demoapp')), 
+           # ... 
+       ] 
+     ```
+3. adding "app_name = <app_name>" to App-level urls.py
   ```python
     #demoapp/urls.py
     from django.urls import path  
@@ -144,3 +154,66 @@
         path('', views.index, name='index'),      
     ] 
   ```
+3. we can also use namespace with more than one app
+  ```python
+    #newapp/urls.py 
+   from django.urls import path 
+   from . import views 
+   app_name='newapp' 
+   urlpatterns = [ 
+       path('', views.index, name='index'), 
+   ] 
+  ```
+4. In the Project-level urls.py
+  ```python
+    from django.contrib import admin 
+    from django.urls import path, include 
+    
+    urlpatterns = [ 
+        path('admin/', admin.site.urls), 
+        path('demo/', include('demoapp.urls')), 
+        path('newdemo/', include('newapp.urls')), 
+    ] 
+  ```
+5. To check the url path/route in django shell
+  ```bash
+    python manage.py shell 
+  ```
+  ```bash
+    >>> reverse('demoapp:index') 
+    '/demo/' 
+  ```
+  ```bash
+    >>> reverse('newapp:index') 
+    '/newdemo/' 
+  ```
+6. In views.py
+   ```python
+    from django.http import HttpResponsePermanentRedirect 
+    from django.urls import reverse 
+      
+    def myview(request): 
+        .... 
+        return HttpResponsePermanentRedirect(reverse('demoapp:login'))
+   ```
+7. Using namespace in the url tag
+ - without using namespace
+     ```html
+      <form action="/demoapp/login" method="post"> 
+      #form attributes 
+      <input type='submit'> 
+      </form> 
+     ```
+     ```html
+      <form action="{% url 'login' %}" method="post"> 
+      #form attributes 
+      <input type='submit'> 
+      </form> 
+     ```
+ - using namespace
+     ```html
+      <form action="{% url 'demoapp:login' %}" method="post"> 
+      #form attributes 
+      <input type='submit'> 
+      </form> 
+     ```
