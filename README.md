@@ -251,11 +251,12 @@
        return HttpResponse("Product Found") 
    ```
   - Custom page error handling (in views.py)
-    1. First in settings.py set DEBUG to FALSE
+    1. First in settings.py set DEBUG to FALSE and add '*' to the ALLOWED_HOSTS to include all possible hosts.
        ```python
        #settings.py      
        # SECURITY WARNING: don't run with debug turned on in production!        
-       DEBUG=FALSE 
+       DEBUG=FALSE
+       ALLOWED_HOSTS = ['*']
        ```
     2. ...
   - Exception Classes
