@@ -83,7 +83,7 @@
              path('', views.home, name="home"),
      ] 
    ```
-4. in the Project0level urls.py
+4. in the Project-level urls.py
    ```bash
      from django.contrib import admin
      from django.urls import path, include
@@ -105,4 +105,31 @@
          'django.contrib.staticfiles',
          'myapp.apps.MyappConfig', 
     ]
+   ```
+### Views HttpResponse
+1. make sure to have django installed
+2. in the views.py
+   ```bash
+     from django.shortcuts import render
+     from http.client import HTTPResponse
+     from django.http import HttpResponse
+     
+     def drinks(request, drink_name):
+         drink = {
+             'mocha' : 'type of coffee',
+             'tea' : 'type of hot beverage',
+             'lemonade': 'type of refreshment'
+         }
+         choice_of_drink = drink[drink_name]
+         return HttpResponse(f"<h2>{drink_name}</h2> " + choice_of_drink)
+
+   ```
+3. in the App-level urls.py (If not exists please create one)
+   ```bash
+     from django.urls import path
+     from . import views
+     
+     urlpatterns = [
+         path('drinks/<str:drink_name>', views.drinks, name="drink_name"), 
+     ]
    ```
