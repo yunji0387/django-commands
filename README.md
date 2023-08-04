@@ -106,7 +106,7 @@
          'myapp.apps.MyappConfig', 
     ]
    ```
-### Views HttpResponse
+### Create URL path with views HttpResponse
 1. make sure to have django installed
 2. in the views.py
    ```bash
