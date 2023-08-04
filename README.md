@@ -217,3 +217,73 @@
       <input type='submit'> 
       </form> 
      ```
+### views.py Http Error Handling 
+- Basic error handling (in views.py)
+   ```python
+   from django.http import HttpResponse, HttpResponseNotFound 
+   def my_view(request): 
+       # ... 
+       if condition==True: 
+           return HttpResponseNotFound('<h1>Page not found</h1>') 
+       else: 
+           return HttpResponse('<h1>Page was found</h1>') 
+   ```
+   or
+  ```python
+   from django.http import HttpResponse 
+   def my_view(request): 
+       # ... 
+       if condition==True: 
+           return HttpResponse('<h1>Page not found</h1>', status_code='404') 
+       else: 
+           return HttpResponse('<h1>Page was found</h1>') 
+   ```
+- Raise error handling (in views.py)
+   ```python
+   from django.http import Http404, HttpResponse 
+   from .models import Product 
+   
+   def detail(request, id): 
+       try: 
+           p = Product.objects.get(pk=id) 
+       except Product.DoesNotExist: 
+           raise Http404("Product does not exist") 
+       return HttpResponse("Product Found") 
+   ```
+  - Custom page error handling (in views.py)
+    1. First in settings.py set DEBUG to FALSE
+       ```python
+       #settings.py      
+       # SECURITY WARNING: don't run with debug turned on in production!        
+       DEBUG=FALSE 
+       ```
+    2. ...
+  - Exception Classes
+    - ObjectDoesNotExist: All the exceptions of the DoesNotExist are inherited from this base exception.
+    - EmptyResultSet: This exception is raised if a query does not return any result.
+    - FieldDoesNotExist: This exception is raised when the requested field does not exist.
+      ```python
+      try: 
+         field = model._meta.get_field(field_name) 
+      except FieldDoesNotExist: 
+         return HttpResponse("Field Does not exist") 
+      ```
+    - MultipleObjectsReturned: When you expect a certain query to return only a single object, however multiple objects are returned. This is when you need to raise this exception.
+    - PermissionDenied: This exception is raised when a user does not have permission to perform the action requested.
+      ```python
+      def myview(request): 
+          if not request.user.has_perm('myapp.view_mymodel'): 
+              raise PermissionDenied() 
+          return HttpResponse() 
+      ```
+    - ViewDoesNotExist: This exception is raised by django.urls when a requested view does not exist, possibly because of incorrect mapping defined in the URLconf.
+    - Django’s Form API
+      ```python
+      def myview(request):   
+          if request.method == "POST":   
+              form = MyForm(request.POST)   
+              if form.is_valid():   
+                  #process the form data 
+              else:   
+                      return HttpResponse("Form submitted with invalid data") 
+      ```
