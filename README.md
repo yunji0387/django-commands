@@ -1,6 +1,6 @@
 # django-commands (For Git Bash in Windows)
 
-### Django Introduction
+### Django 101
 - Django is web framework provides a generic functionality needed for building:
   - web applications
   - APIs
@@ -41,7 +41,8 @@
     -  You place Template web pages in the templates folder with the .html extension.
     -  Django's template processor uses any context data from the view inserted in these blocks to formulate a dynamic response.
     -  The view, in turn, returns the response to the user.
-
+  - [Django Documentation](https://docs.djangoproject.com/en/4.1/)
+ 
 ### create python venv
  1. Make sure to have python installed, and update pip version
       ```bash
