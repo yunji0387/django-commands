@@ -58,11 +58,11 @@
       ```bash
       py -m venv <env_name>
       ```
-  3[1].  To activate venv 
+ 3.  To activate venv 
       ```bash
       source ./<env_name>/Scripts/activate
       ``` 
-  3[2].  To deactivate venv 
+ 4.  To deactivate venv 
       ```bash
       deactivate
       ``` 
