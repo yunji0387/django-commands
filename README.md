@@ -1,4 +1,47 @@
 # django-commands (For Git Bash in Windows)
+
+### Django Introduction
+- Django is web framework provides a generic functionality needed for building:
+  - web applications
+  - APIs
+  - web services
+- Django used MVT Architecture
+  [mvtArchitecture](mvtArchitecture.png)
+  - URL dispatcher
+    - equivalent to the controller in the MVC architecture.
+    - The URL patterns defined in each app under the project are also included, urls.py:
+      ```python
+      from django.urls import path 
+      from . import views 
+      
+      urlpatterns = [ 
+          path('', views.index, name='index'), 
+      ] 
+      ```
+  - View
+    - view function reads the path, query, and body parameters included in the client's request If required.
+      - It uses this data to interact with the models to perform CRUD operations.
+    - A view can be a user-defined function or a class, You create View definitions in the views.pyfile of the respective app package folder.
+    - The following code in the view.py file defines the index() view function.
+      ```python
+      from django.shortcuts import render 
+      # Create your views here. 
+      from django.http import HttpResponse 
+      
+      def index(request): 
+          return HttpResponse("Hello, world.") 
+      ```
+  - Model
+    - a Python class, An app may have one or more model classes, conventionally put in the models.py file.
+    - Django migrates the attributes of the model class to construct a database table of a matching structure.
+    - Django's Object Relational Mapper helps perform CRUD operations in an object-oriented way instead of invoking SQL queries.
+    - The view uses the client's and the model's data and renders its response using a template.
+  - Template
+    -  a web page containing a mix of static HTML and Django Template Language code blocks.
+    -  You place Template web pages in the templates folder with the .html extension.
+    -  Django's template processor uses any context data from the view inserted in these blocks to formulate a dynamic response.
+    -  The view, in turn, returns the response to the user.
+
 ### create python venv
  1. Make sure to have python installed, and update pip version
       ```bash
